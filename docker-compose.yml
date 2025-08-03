@@ -59,6 +59,32 @@ services:
       - ELASTIC_URL=http://elasticsearch:9200
       - PORT=3000
 
+  frontend:
+    image: frontend
+    build:
+      context: ./frontend
+    ports:
+      - '4200:4200'
+    environment:
+      - BACKEND_HOST=http://localhost:3000
+    volumes:
+      - type: bind
+        source: ./frontend/src
+        target: /app/frontend/src
+    depends_on:
+      - backend
+    links:
+      - backend
+    networks:
+      - backend-net
+    restart: unless-stopped
+    healthcheck:
+          test: curl --fail http://localhost:4200/ || exit 1
+          interval: 40s
+          timeout: 30s
+          retries: 3
+          start_period: 60s
+
 networks:
   backend-net:
 
