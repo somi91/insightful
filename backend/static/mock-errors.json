@@ -1,0 +1,72 @@
+[
+  {
+    "timestamp": "2025-07-15T10:10:00Z",
+    "userId": "user-124",
+    "browser": "Chrome",
+    "url": "/dashboard",
+    "errorMessage": "Server error: null is not allowed",
+    "stackTrace": "at Object.<anonymous> (main.ts:22)"
+  },
+  {
+    "timestamp": "2025-07-16T10:10:00Z",
+    "userId": "user-123",
+    "browser": "Safari",
+    "url": "/dashboard",
+    "errorMessage": "Uncaught TypeError: undefined is not a function",
+    "stackTrace": "at Object.<anonymous> (main.ts:22)"
+  },
+  {
+    "timestamp": "2025-07-17T10:10:00Z",
+    "userId": "user-123",
+    "browser": "Mozzila",
+    "url": "/dashboard",
+    "errorMessage": "Server error: null is not allowed",
+    "stackTrace": "at Object.<anonymous> (main.ts:22)"
+  },
+  {
+    "timestamp": "2025-07-18T10:10:00Z",
+    "userId": "user-123",
+    "browser": "Chrome",
+    "url": "/dashboard",
+    "errorMessage": "Uncaught TypeError: undefined is not a function",
+    "stackTrace": "at Object.<anonymous> (main.ts:22)"
+  },
+  {
+    "timestamp": "2025-07-18T10:10:00Z",
+    "userId": "user-125",
+    "browser": "Chrome",
+    "url": "/dashboard",
+    "errorMessage": "Uncaught TypeError: undefined is not a function",
+    "stackTrace": "at Object.<anonymous> (main.ts:22)"
+  },
+  {
+    "timestamp": "2025-07-18T10:10:00Z",
+    "userId": "user-126",
+    "browser": "Mozzila",
+    "url": "/dashboard",
+    "errorMessage": "Uncaught TypeError: undefined is not a function",
+    "stackTrace": "at Object.<anonymous> (main.ts:22)"
+  },
+  {
+        "timestamp": "2025-08-01T10:10:00.000Z",
+        "userId": "milos-1",
+        "browser": "Safari",
+        "url": "/dashboard",
+        "errorMessage": "Uncaught JS Error: undefined is not a function",
+        "stackTrace": "at Object.\u003Canonymous\u003E (main.ts:22)"
+    },{
+        "timestamp": "2025-08-02T10:10:00.000Z",
+        "userId": "milos-2",
+        "browser": "Safari",
+        "url": "/dashboard",
+        "errorMessage": "Uncaught JS Error: null is not a function",
+        "stackTrace": "at Object.\u003Canonymous\u003E (main.ts:22)"
+    },{
+        "timestamp": "2025-08-03T10:10:00.000Z",
+        "userId": "milos-2",
+        "browser": "Safari",
+        "url": "/dashboard",
+        "errorMessage": "JS Error: NaN",
+        "stackTrace": "at Object.\u003Canonymous\u003E (main.ts:22)"
+    }
+]

@@ -1,0 +1,1 @@
+export const INDEX_ERROR_EVENTS = "error-events";
