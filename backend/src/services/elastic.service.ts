@@ -4,8 +4,8 @@ import { INDEX_ERROR_EVENTS } from '../config.js';
 console.log("process.env.ELASTIC_URL", process.env.ELASTIC_URL);
 export const esClient = new Client({ 
   node: process.env.ELASTIC_URL || 'http://elasticsearch:9200',
-  maxRetries: 3,
-  requestTimeout: 60000,
+  maxRetries: 5,
+  requestTimeout: 80000,
   sniffOnStart: true,
 });
 
