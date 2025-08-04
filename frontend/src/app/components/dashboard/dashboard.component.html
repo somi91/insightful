@@ -1,4 +1,19 @@
 <div class="dashboard">
-  <canvas id="canvas">{{ chart }}</canvas>
+  <app-filters (filterChange)="applyFilters($event)"></app-filters>
+
+  <section>
+    <h2>Errors</h2>
+    <app-errors-table [events]="events"></app-errors-table>
+  </section>
+
+  <section>
+    <h2>Results and Stats</h2>
+    <pre>{{ stats | json }}</pre>
+  </section>
+
+  <section>
+    <h2>Widgets</h2>
+    <app-widgets [events]="events"></app-widgets>
+  </section>
 
 </div>

@@ -16,6 +16,15 @@ export class ApiService {
         'Access-Control-Allow-Origin': 'http://localhost:3000',
         'Access-Control-Allow-Credentials': 'true'
       }
-    }));
+    }).pipe(take(1)));
   }
+
+  getEvents(filters: any) {
+    return this.http.get<any[]>(`${this.apiUrl}/events/search`, { params: filters });
+  }
+
+  getStats() {
+    return this.http.get(`${this.apiUrl}/events/stats`);
+  }
+
 }

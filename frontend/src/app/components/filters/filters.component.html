@@ -1,0 +1,8 @@
+<form [formGroup]="form">
+  <input type="date" formControlName="dateFrom" placeholder="From date">
+  <input type="date" formControlName="dateTo" placeholder="To date">
+  <input type="text" formControlName="userId" placeholder="User ID">
+  <input type="text" formControlName="browser" placeholder="Browser">
+  <input type="text" formControlName="keyword" placeholder="Keyword">
+  <button type="button" (click)="apply()">Apply Filters</button>
+</form>
