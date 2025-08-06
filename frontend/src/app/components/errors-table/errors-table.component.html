@@ -1,18 +1,20 @@
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Timestamp</th>
       <th>User ID</th>
       <th>Browser</th>
       <th>Error</th>
+      <th>Stack Trace</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let e of events | orderBy:'timestamp':true">
-      <td>{{ e.timestamp }}</td>
-      <td>{{ e.userId }}</td>
-      <td>{{ e.browser }}</td>
-      <td>{{ e.errorMessage }}</td>
+      <td class="col">{{ e.timestamp | date }}</td>
+      <td class="col">{{ e.userId }}</td>
+      <td class="col">{{ e.browser }}</td>
+      <td class="col">{{ e.errorMessage }}</td>
+      <td class="col">{{ e.stackTrace }}</td>
     </tr>
   </tbody>
 </table>

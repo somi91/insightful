@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { DatePipe, NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
 
@@ -7,7 +7,7 @@ import { OrderByPipe } from 'src/app/pipes/order-by.pipe';
   selector: 'app-errors-table',
   templateUrl: './errors-table.component.html',
   styleUrls: ['./errors-table.component.scss'],
-  imports: [OrderByPipe, NgFor]
+  imports: [OrderByPipe, NgFor, DatePipe]
 })
 export class ErrorsTableComponent {
 

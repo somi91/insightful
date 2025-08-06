@@ -6,9 +6,10 @@ import { INDEX_ERROR_EVENTS } from '../config.js';
 import mongoose from 'mongoose';
 import ErrorModel from '../models/error.model.js';
 import { ingestData } from '../services/ingest.service.js';
+import { SearchFilters } from '../models/search-filters.js';
 
 export async function searchEvents(
-  req: { query: { [s: string]: unknown; } | ArrayLike<unknown>; }, 
+  req: { query: SearchFilters }, 
   res: { json: (arg0: estypes.SearchHit<unknown>[]) => void; }
 ) {
   const cacheKey = `search:${JSON.stringify(req.query)}`;
@@ -17,15 +18,40 @@ export async function searchEvents(
   console.log('from cached', cached);
   if (cached && (cached && cached.length > 0)) return res.json(JSON.parse(cached));
   createIndexWithMapping()
+  Object.entries(req.query)
+  const {timestamp, ...filters} = req.query;
 
   const result = await esClient.search({
     index: INDEX_ERROR_EVENTS,
     profile: true,
     query: {
       bool: {
-        must: Object.entries(req.query).map(([key, val]) => ({
-          match: { [key]: val as string }
-        }))
+        must: Object.entries(req.query).map(([key, val]) => {
+          if(key === 'timestamp') {
+            const ts = Number(val);
+            const start = new Date(ts);
+            start.setDate(start.getDate() + 1)
+            start.setUTCHours(0, 0, 0, 0);
+
+            const end = new Date(ts);
+            end.setDate(end.getDate() + 1)
+            end.setUTCHours(23, 59, 59, 999);
+            // console.log("start", start, start.toISOString(),)
+            // console.log("end", end, end.toISOString())
+            return {
+              range: {
+                timestamp: {
+                  gte: start.toISOString(),
+                  lte: end.toISOString(),
+                }
+              }
+            }
+          } else {
+            return {
+              match: { [key]: val as string }
+            }
+          }
+        })
       }
     }
   });
