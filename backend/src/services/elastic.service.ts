@@ -36,9 +36,23 @@ export async function createIndexWithMapping() {
       properties: {
         timestamp: { type: 'date' },
         userId: { type: 'text' },
-        browser: { type: 'text' },
+        browser: {
+          type: "text",
+          fields: {
+            keyword: {
+              type: "keyword"
+            }
+          }
+        },
         url: { type: 'text' },
-        errorMessage: { type: 'text' },
+        errorMessage: {
+          type: "text",
+          fields: {
+            keyword: {
+              type: "keyword"
+            }
+          }
+        },
         stackTrace: { type: 'text' },
       }
     }

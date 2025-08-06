@@ -23,7 +23,6 @@ export async function searchEvents(
 
   const result = await esClient.search({
     index: INDEX_ERROR_EVENTS,
-    profile: true,
     query: {
       bool: {
         must: Object.entries(req.query).map(([key, val]) => {
@@ -67,13 +66,12 @@ export async function getStats(
   res: { json: (arg0: Record<string, estypes.AggregationsAggregate> | undefined) => void; }
 ) {
   const cacheKey = 'stats';
-  // const cached = await cacheGet(cacheKey);
-  // if (cached) return res.json(JSON.parse(cached));
+  const cached = await cacheGet(cacheKey);
+  if (cached) return res.json(JSON.parse(cached));
   console.log('getStats')
 
   const result = await esClient.search({
     index: INDEX_ERROR_EVENTS,
-    profile: true,
     size: 0,
     aggs: {
       by_browser: { terms: { field: 'browser.keyword' } },
@@ -81,7 +79,7 @@ export async function getStats(
     }
   });
 
-  // await cacheSet(cacheKey, result.aggregations);
+  await cacheSet(cacheKey, result.aggregations);
   res.json(result.aggregations);
 }
 export async function getAllDB(
