@@ -11,3 +11,8 @@ export async function cacheGet(key: string) {
 export async function cacheSet(key: string, data: any, ttl = 60) {
   await redisClient.set(key, JSON.stringify(data), { EX: ttl });
 }
+
+
+export async function deleteByKeys(keys: string[]) {
+  return await redisClient.del(keys);
+}

@@ -1,5 +1,5 @@
 import { createIndexWithMapping, esClient } from '../services/elastic.service.js';
-import { cacheGet, cacheSet } from '../services/cache.service.js';
+import { cacheGet, cacheSet, deleteByKeys } from '../services/cache.service.js';
 // import { AggregationsAggregate, SearchHit } from '@elastic/elasticsearch/lib/api/types';
 import { estypes } from '@elastic/elasticsearch';
 import { INDEX_ERROR_EVENTS } from '../config.js';
@@ -14,15 +14,20 @@ export async function searchEvents(
 ) {
   const cacheKey = `search:${JSON.stringify(req.query)}`;
   console.log('cacheKey', cacheKey);
-  const cached = await cacheGet(cacheKey);
-  console.log('from cached', cached);
-  if (cached && (cached && cached.length > 0)) return res.json(JSON.parse(cached));
+  deleteByKeys([cacheKey]);
+  // const cached = await cacheGet(cacheKey);
+  // console.log('from cached', cached);
+  // if (cached && (cached && cached.length > 0)) return res.json(JSON.parse(cached));
   createIndexWithMapping()
   Object.entries(req.query)
   const {timestamp, ...filters} = req.query;
 
   const result = await esClient.search({
     index: INDEX_ERROR_EVENTS,
+    sort: [
+      { timestamp: { order: 'desc' } }
+    ],
+    size: 100,
     query: {
       bool: {
         must: Object.entries(req.query).map(([key, val]) => {
@@ -55,7 +60,7 @@ export async function searchEvents(
     }
   });
 
-  console.log('result esClient', result, result.hits.hits);
+  console.log('result esClient', result, result.hits.hits, result.hits.hits.length);
   await cacheSet(cacheKey, result.hits.hits);
   console.log('set cached', cacheKey, result.hits.hits);
   res.json(result.hits.hits);
