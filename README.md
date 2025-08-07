@@ -10,3 +10,7 @@ Fix for ES not started on time
 
 ## Seed data to events/addErrors
 POST http://localhost:3000/events/addErrors
+
+## Frontend
+
+App is running on: http://localhost:4200/
